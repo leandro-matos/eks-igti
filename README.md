@@ -44,8 +44,8 @@ kubectl apply -f kubernetes/metric-server/metric-server.yml
 
 ```bash
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-helm install prometheus-stack prometheus-community/kube-prometheus-stack --create-namespace monitoring
-kubectl port-forward service/prometheus-stack-grafana 3000:80 -n monitoring
+helm install prometheus-stack prometheus-community/kube-prometheus-stack
+kubectl port-forward service/prometheus-stack-grafana 3000:80
 ```
 
 ## Deploy demo services
