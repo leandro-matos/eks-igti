@@ -43,8 +43,8 @@ spec:
   ports:
     - port: 80
       targetPort: 8080
-      nodePort: 30000
-  type: LoadBalancer
+  type: ClusterIP 
+
 
 ---
 apiVersion: apps/v1
@@ -86,4 +86,4 @@ spec:
   ports:
     - port: 27017
       targetPort: 27017
-  type: ClusterIP%  
+  type: ClusterIP 

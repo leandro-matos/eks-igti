@@ -273,7 +273,7 @@ kind: Service
 metadata:
   name: frontend-external
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: frontend
   ports:
@@ -720,4 +720,4 @@ spec:
   - name: grpc
     port: 9555
     targetPort: 9555
----
+
