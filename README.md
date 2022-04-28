@@ -39,6 +39,13 @@ kubectl apply -f kubernetes/traefik/ingress.yml
 ```bash
 kubectl apply -f kubernetes/metric-server/metric-server.yml
 ```
+## Deploy demo services
+
+```bash
+kubectl apply -f kubernetes/apps/app-produtos.yaml
+kubectl apply -f kubernetes/apps/app-loja.yaml
+kubectl apply -f kubernetes/apps/app-ingress.yaml
+```
 
 ## Deploy do Prometheus-Operator via Helm para monitoração do Cluster
 
@@ -48,13 +55,6 @@ helm install prometheus-stack prometheus-community/kube-prometheus-stack
 kubectl port-forward service/prometheus-stack-grafana 3000:80
 ```
 
-## Deploy demo services
-
-```bash
-kubectl apply -f kubernetes/apps/app-produtos.yaml
-kubectl apply -f kubernetes/apps/app-loja.yaml
-kubectl apply -f kubernetes/apps/app-ingress.yaml
-```
 
 ## Author
 
