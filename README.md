@@ -61,12 +61,10 @@ Pass: prom-operator
 ## Deploy do EFK (Fluentd, Elastic search e Kibana)
 
 ```bash
-helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-helm install prometheus-stack prometheus-community/kube-prometheus-stack
-kubectl port-forward service/prometheus-stack-grafana 3000:80
+kubectl create namespace logging
+helm install elasticsearch elastic/elasticsearch -n logging --set replicas=1
+helm install kibana elastic/kibana -n logging
 
-User: admin
-Pass: prom-operator
 ```
 
 
