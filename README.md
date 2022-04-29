@@ -55,6 +55,20 @@ helm install prometheus-stack prometheus-community/kube-prometheus-stack
 kubectl port-forward service/prometheus-stack-grafana 3000:80
 ```
 
+## Tracing utilizado X-Ray
+
+```bash
+Install eksctl
+curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+sudo mv /tmp/eksctl /usr/local/bin
+eksctl
+
+eksctl utils associate-iam-oidc-provider --cluster k8s-igti-pos --approve --region sa-east-1
+eksctl create iamserviceaccount --name xray-daemon --namespace default --cluster k8s-igti-pos --region sa-east-1 --attach-policy-arn arn:aws:iam::aws:policy/AWSXRayDaemonWriteAccess --approve --override-existing-serviceaccounts
+
+```
+
+
 
 ## Author
 
