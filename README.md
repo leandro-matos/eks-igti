@@ -53,6 +53,9 @@ kubectl apply -f kubernetes/apps/app-ingress.yaml
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm install prometheus-stack prometheus-community/kube-prometheus-stack
 kubectl port-forward service/prometheus-stack-grafana 3000:80
+
+User: admin
+Pass: prom-operator
 ```
 
 ## Tracing utilizado X-Ray
@@ -66,11 +69,11 @@ eksctl
 Install x-ray and app
 eksctl utils associate-iam-oidc-provider --cluster k8s-igti-pos --approve --region sa-east-1
 eksctl create iamserviceaccount --name xray-daemon --namespace default --cluster k8s-igti-pos --region sa-east-1 --attach-policy-arn arn:aws:iam::aws:policy/AWSXRayDaemonWriteAccess --approve --override-existing-serviceaccounts
-kubectl create -f https://eksworkshop.com/intermediate/245_x-ray/daemonset.files/xray-k8s-daemonset.yaml
+cd x-ray && kubectl create -f xray-k8s-daemonset.yaml
 kubectl describe daemonset xray-daemon
 kubectl logs -l app=xray-daemon
-kubectl apply -f https://eksworkshop.com/intermediate/245_x-ray/sample-front.files/x-ray-sample-front-k8s.yml
-kubectl apply -f https://eksworkshop.com/intermediate/245_x-ray/sample-back.files/x-ray-sample-back-k8s.yml
+cd x-ray && kubectl apply -f x-ray-sample-front-k8s.yml
+cd x-ray && kubectl apply -f x-ray-sample-back-k8s.yml
 kubectl describe deployments x-ray-sample-front-k8s x-ray-sample-back-k8s
 kubectl describe services x-ray-sample-front-k8s x-ray-sample-back-k8s
 kubectl get service x-ray-sample-front-k8s -o wide
@@ -78,8 +81,8 @@ kubectl get service x-ray-sample-front-k8s -o wide
 Delete
 kubectl delete deployments x-ray-sample-front-k8s x-ray-sample-back-k8s
 kubectl delete services x-ray-sample-front-k8s x-ray-sample-back-k8s
-kubectl delete -f https://eksworkshop.com/intermediate/245_x-ray/daemonset.files/xray-k8s-daemonset.yaml
-eksctl delete iamserviceaccount --name xray-daemon --cluster eksworkshop-eksctl
+cd x-ray && kubectl delete -f xray-k8s-daemonset.yaml
+eksctl delete iamserviceaccount --name xray-daemon --cluster k8s-igti-pos --region sa-east-1
 ```
 
 
