@@ -58,6 +58,16 @@ User: admin
 Pass: prom-operator
 ```
 
+## Deploy do EFK (Fluentd, Elastic search e Kibana)
+
+```bash
+kubectl create namespace logging
+helm install elasticsearch elastic/elasticsearch -n logging --set replicas=1
+helm install kibana elastic/kibana -n logging
+
+```
+
+
 ## Tracing utilizado X-Ray
 
 ```bash
