@@ -53,6 +53,9 @@ kubectl apply -f kubernetes/apps/app-ingress.yaml
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm install prometheus-stack prometheus-community/kube-prometheus-stack
 kubectl port-forward service/prometheus-stack-grafana 3000:80
+
+User: admin
+Pass: prom-operator
 ```
 
 ## Tracing utilizado X-Ray
