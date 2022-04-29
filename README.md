@@ -58,6 +58,18 @@ User: admin
 Pass: prom-operator
 ```
 
+## Deploy do EFK (Fluentd, Elastic search e Kibana)
+
+```bash
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm install prometheus-stack prometheus-community/kube-prometheus-stack
+kubectl port-forward service/prometheus-stack-grafana 3000:80
+
+User: admin
+Pass: prom-operator
+```
+
+
 ## Tracing utilizado X-Ray
 
 ```bash
