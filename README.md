@@ -65,6 +65,12 @@ kubectl create namespace logging
 helm install elasticsearch elastic/elasticsearch -n logging --set replicas=1
 helm install kibana elastic/kibana -n logging
 
+Install Fluentd:
+kubectl apply -f fluentd/fluentd-with-rbac.yaml
+kubectl apply -f fluentd/fluentd-config-map.yaml
+
+Acesso:
+kubectl port-forward svc/kibana-kibana 5601 -n logging
 ```
 
 
